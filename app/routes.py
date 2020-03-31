@@ -18,6 +18,7 @@ def index():
     sensors = Sensor.query.filter(Sensor.isEnabled == 1).all()
     return render_template('index.html', thresholds=thresholds, alert_log=alert_log, sensors=sensors)
 
+@app.route('/log')
 @app.route('/log.html')
 def log():
     sensor_log = Sensor.query.all()
@@ -40,6 +41,7 @@ def update_alarm_table():
     alert_log = Alert_Log.query.order_by(Alert_Log.timestamp_triggered).limit(5000).all()
     return jsonify({'text': 'test'})
 
+@app.route('/setup')
 @app.route('/setup.html')
 def setup():
     return render_template('setup.html')
